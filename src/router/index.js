@@ -1,18 +1,30 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 // import Home from "../views/Home.vue";
-import Login from "../components/Login.vue"
+import Login from "../views/Login.vue";
+import Home from "../views/Home.vue"
+import Dashboard from '../components/Dashboard.vue'
+import Users from '../components/user/Users.vue'
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path:"/",
+    path: "/",
     redirect: "/login"
   },
   {
-    path:"/login",
-    component:Login
+    path: "/login",
+    component: Login
+  },
+  {
+    path:'/home',
+    component:Home,
+    redirect: '/dashboard',
+    children: [
+        { path: '/dashboard', component: Dashboard },
+        { path: '/users' , component :Users}
+    ]
   }
   // {
   //   path: "/",
@@ -33,5 +45,12 @@ const routes = [
 const router = new VueRouter({
   routes
 });
+
+router.beforeEach((to,from,next) => {
+  if(to.path === '/login') return next()
+  const tokenStr = window.sessionStorage.getItem("token")
+  if(!tokenStr) return next("/login")
+  next()
+})
 
 export default router;
