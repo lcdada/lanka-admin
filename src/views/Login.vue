@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
 export default {
   data() {
     return {
@@ -59,14 +60,7 @@ export default {
   },
   components: {},
   created () {
-      console.log(process.env)
-      this.$http.get("/api/v1/admin/goods/comment/lists")
-      .then((res)=>{
-		  console.log(res)
-	  })
-	  .catch((err)=>{
-
-	  })
+      // console.log(process.env)
   },
   methods: {
     // dianji
@@ -74,13 +68,29 @@ export default {
       // console.log(this)
       this.$refs.loginFormRef.resetFields();
     },
+    // ...mapMutations(['changeLogin']),
     login(){
-        this.$refs.loginFormRef.validate( valid=>{
-            // console.log(valid)
-             this.$message.success("登录成功")
-            if(!valid) return;
-            window.sessionStorage.setItem("token",126564)
-            this.$router.push({path:'/home'})
+      // let _this = this;
+      this.$refs.loginFormRef.validate( valid=>{
+			if(!valid) return;
+		  this.$api.user.login({
+					mobile:"13683668735",
+					password:"1234567"
+				})
+				.then((res)=>{
+        if(res.data.status == 1){
+              console.log(res)
+              const key = res.data.data.access_token
+              window.localStorage.setItem("Authorization",'Bearer ' +key)
+              this.$router.push({path:'/home'});
+              this.$message.success("登录成功")
+          }
+				})
+				.catch((err)=>{
+          console.log(err)
+				})
+
+           
         })
     }
   }

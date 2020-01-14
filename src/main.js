@@ -6,12 +6,19 @@ import store from "./store";
 import "./plugins/element.js";
 import "./assets/css/global.css";
 import "./assets/font/iconfont.css";
-// import http from "./api/http"
-import axios from "axios"
+import api from './api' // 导入api接口
+import VueRouter from 'vue-router';
+import 'default-passive-events'
 
-Vue.prototype.$http = axios
+const routerPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return routerPush.call(this, location).catch(error=> error)
+}
+
+
+
 Vue.config.productionTip = false;
-// Vue.prototype.$http = http
+Vue.prototype.$api = api; // 将api挂载到vue的原型上
 
 new Vue({
   router,
