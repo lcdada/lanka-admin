@@ -25,7 +25,7 @@ import {
      Select,
      Option,
      DatePicker,
-
+     Dialog,
     
     } from "element-ui";
 
@@ -54,5 +54,6 @@ Vue.use(Pagination)
 Vue.use(Select)
 Vue.use(Option)
 Vue.use(DatePicker)
+Vue.use(Dialog)
 
 Vue.prototype.$message = Message

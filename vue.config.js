@@ -1,6 +1,8 @@
 module.exports = {
   lintOnSave: false,
   devServer :{
+    host:'0.0.0.0',
+    port:8080,
       proxy:{
         '/api': {
             target:"http://dev-gift.lkvip.cn",//请求的目标地址的BaseURL

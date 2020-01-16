@@ -11,6 +11,7 @@
   "dependencies": {
     "core-js": "^3.4.3",
     "default-passive-events": "^1.0.10",
+    "echarts": "^4.6.0",
     "element-ui": "^2.4.5",
     "vue": "^2.6.10",
     "vue-router": "^3.1.3",

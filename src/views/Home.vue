@@ -43,7 +43,7 @@
         //     }
             async getMenus(){
                 const {data:res} = await   this.$api.user.getMenus({})
-                console.log(res)
+                // console.log(res)
                 if (res.status != 1) return
                 this.menuLIst  =  res.data
             }
