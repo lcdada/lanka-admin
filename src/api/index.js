@@ -9,6 +9,8 @@ import goodsClass from '@/api/apilist/goodsClass'
 import evaluate from '@/api/apilist/evaluate'
 // 礼包管理
 import giftPackage from '@/api/apilist/giftPackage'
+// 系统设置
+import system from '@/api/apilist/system'
 
 
 
@@ -18,5 +20,6 @@ export default {
     user,
     goodsClass,
     evaluate,
-    giftPackage
+    giftPackage,
+    system
 }

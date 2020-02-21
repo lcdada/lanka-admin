@@ -84,6 +84,7 @@ export default {
 
   .el-menu {
     border-right: none;
+    text-align left !important 
   }
 }
 

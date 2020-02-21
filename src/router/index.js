@@ -1,6 +1,5 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-// import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import Home from "../views/Home.vue"
 import Dashboard from '../components/Dashboard.vue'
@@ -8,6 +7,7 @@ import Users from '../components/user/Users.vue'
 import UserList from '../components/user/UserList.vue'
 import CommentList from '../components/comment/List.vue'
 import CommentSta from '../components/comment/Sta.vue'
+import Role from '../components/system/Role.vue'
 
 Vue.use(VueRouter);
 
@@ -30,6 +30,7 @@ const routes = [
         { path: '/user/lists' , component :UserList},
         { path: '/comment/list' , component :CommentList},
         { path: '/comment/sta' , component :CommentSta},
+        { path: '/system/role' , component : Role}
     ]
   }
   

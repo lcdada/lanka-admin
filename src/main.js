@@ -1,5 +1,4 @@
 import Vue from "vue";
-import "./plugins/axios";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
@@ -9,6 +8,9 @@ import "./assets/font/iconfont.css";
 import api from './api' // 导入api接口
 import VueRouter from 'vue-router';
 import 'default-passive-events'
+import echarts from 'echarts'
+
+Vue.prototype.$echarts = echarts
 
 const routerPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {
