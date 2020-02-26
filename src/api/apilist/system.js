@@ -15,6 +15,10 @@ const system = {
     addRole (params) {        
         return axios.post(`${base.home}/api/v1/admin/role/add`, qs.stringify(params));    
     },
+//角色详情
+    detailRole (params) {        
+        return axios.post(`${base.home}/api/v1/admin/role/detail`, qs.stringify(params));    
+    },
 // 为角色设置权限
     setRole (params) {        
         return axios.post(`${base.home}/api/v1/admin/role/add/permission`, qs.stringify(params));    
