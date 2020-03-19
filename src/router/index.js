@@ -8,6 +8,7 @@ import UserList from '../components/user/UserList.vue'
 import CommentList from '../components/comment/List.vue'
 import CommentSta from '../components/comment/Sta.vue'
 import Role from '../components/system/Role.vue'
+import Rights from '../components/power/Rights.vue'
 
 Vue.use(VueRouter);
 
@@ -30,7 +31,8 @@ const routes = [
         { path: '/user/lists' , component :UserList},
         { path: '/comment/list' , component :CommentList},
         { path: '/comment/sta' , component :CommentSta},
-        { path: '/system/role' , component : Role}
+        { path: '/system/role' , component : Role},
+        { path: '/system/permission', component : Rights}
     ]
   }
   

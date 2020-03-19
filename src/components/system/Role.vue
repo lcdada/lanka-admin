@@ -20,6 +20,8 @@
         </el-col>
       </el-row>
       <el-table :data="tableData" style="width: 100%" border stripe>
+        <!-- 展开列 -->
+        <el-table-column type="expand"></el-table-column>
         <el-table-column type="index" label="#"></el-table-column>
         <el-table-column prop="name" label="职位" width="180"></el-table-column>
         <el-table-column prop="remark" label="角色" width="180"></el-table-column>
@@ -35,7 +37,7 @@
           <template slot-scope="scope">
               <el-button size="mini" type="primary" icon="el-icon-edit" @click="showEditDialong(scope.row.id)">编辑</el-button>
               <el-button size="mini" type="danger" icon="el-icon-delete-solid" @click="removeUserById(scope.row.id)">删除</el-button>
-              <el-button size="mini" type="warning" icon="el-icon-setting">分配权限</el-button>
+              <el-button size="mini" type="warning" icon="el-icon-setting"  @click="showSetRightDialog">分配权限</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -69,6 +71,7 @@
             <el-button @click="addRoleDialogVisible = false">取 消</el-button>
             <el-button type="primary" @click="addRelo">确 定</el-button>
         </span>
+         
     </el-dialog>
     <!-- 修改角色 -->
     <el-dialog
@@ -89,6 +92,21 @@
             <el-button @click="editDialogVisible = false">取 消</el-button>
             <el-button type="primary" @click="editUserInfo">确 定</el-button>
         </span>
+    </el-dialog>
+    <!-- 分配权限 -->
+    <el-dialog
+      title="分配权限"
+      :visible.sync="setRightDialogVisible"
+      width="50%"
+      >
+      <!-- 树形控件 -->
+      <el-tree :data="rightsList" :props="treeProps"
+       show-checkbox node-key="id" default-expand-all
+       default-checked-keys="defkeys"></el-tree>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="setRightDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="setRightDialogVisible = false">确 定</el-button>
+      </span>
     </el-dialog>
   </div>
 </template>
@@ -140,7 +158,19 @@ export default {
               {required : true,message:'请输入角色',trigger:'blur'},
               {min:2,max:8,message:"角色名称长度在2-8位之间",trigger:'blur'}
           ]
-      }
+      },
+    // 控制分配权限对话框显示隐藏
+      setRightDialogVisible:false,
+    // 权限列表
+      rightsList:[],
+    // 树形控件的属性绑定对象
+      treeProps:{
+        label:"name",
+        children: "child"
+      },
+      // 默认选中的节点Id数组值
+      defkeys:[],
+
     };
   },
   components: {},
@@ -234,6 +264,16 @@ export default {
         } 
         this.$message.success('删除角色成功')
         this.getRoleList()
+    },
+    // 展示分配权限对话框
+    async showSetRightDialog(){
+      const {data:res} = await this.$api.system.perList({})
+      if(res.status != 1){
+            return this.$message.error("获取权限失败")
+      }
+      console.log(res)
+      this.rightsList = res.data
+      this.setRightDialogVisible = true
     },
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
