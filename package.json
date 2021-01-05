@@ -9,7 +9,7 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "axios": "^0.19.1",
+    "axios": "^0.21.1",
     "core-js": "^3.4.3",
     "default-passive-events": "^1.0.10",
     "echarts": "^4.6.0",
